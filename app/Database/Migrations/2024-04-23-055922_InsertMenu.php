@@ -15,6 +15,10 @@ class InsertMenu extends Migration
                 'unsigned'=>true,
                 'auto_increment'=>true
             ],
+            'image_name'=>[
+                'type'=>'VARCHAR',
+                'constraint'=>255
+            ],
             'menu_name'=>[
                 'type'=>'VARCHAR',
                 'constraint'=>255

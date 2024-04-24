@@ -3,12 +3,22 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use CodeIgniter\API\ResponseTrait;
 use Ramsey\Uuid\Uuid;
 
 class SignupController extends BaseController{
+    use ResponseTrait;
     
     public function register(){
-        $data = json_decode(file_get_contents('php://input'), true); 
+        // $data = json_decode(file_get_contents('php://input'), true);
+        $validate = \Config\Services::validation();
+        $data = $this->request->getPost();
+        
+        $validate->setRuleGroup('validationSignup');
+
+        if($validate->run($data)===false){
+            return $this->fail(['message'=>$validate->getErrors()]);
+        }        
         
         $username = $data['username'];
         $email = $data['email'];

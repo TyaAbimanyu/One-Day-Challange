@@ -7,8 +7,9 @@ class Menu extends Entity{
     protected $attributes = [
         
         'menu_id'=>null,
+        'image_name'=>'',
         'menu_name'=>'',
-        'menu_price'=>'',
+        'menu_price'=> 0,
         'uu_id_m'=>null,
         'created_at'=>null,
         'updated_at'=>null,

@@ -10,7 +10,15 @@ use Ramsey\Uuid\Uuid;
 class LoginController extends BaseController{
     use ResponseTrait;
     public function Login(){
-        $data = json_decode(file_get_contents('php://input'), true); 
+        // $data = json_decode(file_get_contents('php://input'), true); 
+        $validate = \Config\Services::validation();
+        $data = $this->request->getPost();
+
+        $validate->setRuleGroup('validationLogin');
+
+        if($validate->run($data)===false){
+            return $this->fail(['message'=>$validate->getErrors()]);
+        }
 
         $username = $data['username'];
         $password = $data['password'];
@@ -37,6 +45,7 @@ class LoginController extends BaseController{
 
             $tokenModel->insert($tokenData);
             $tokenId = $tokenModel->getInsertID();
+            return $this->respond(['token_id' => $tokenId, 'token' => $token,'create_at'=>$date,'message' => 'Token generated successfully']);
         }else{
             return $this->fail(['Invalid username or Password']);
         }        

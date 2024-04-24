@@ -10,7 +10,7 @@ class MenuModel extends Model{
     protected $useAutoIncrement = true;
 
     protected $returnType = Menu::class;
-    protected $allowedFields = ['menu_name', 'menu_price'];
+    protected $allowedFields = ['image_name','menu_name', 'menu_price','uu_id_m','created_at','updated_at'];
 
     //Line Wajib ada disemua Kode Model
     protected $useTimestamps = false;
